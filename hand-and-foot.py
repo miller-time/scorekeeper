@@ -8,6 +8,8 @@ def init():
     if not name:
       break
     players[name] = 0
+  if not players:
+    sys.exit(0)
 
 
 def printscore():
