@@ -1,2 +1,5 @@
 This is a scorecard, we use it for a card game called Hand and Foot, but it
 could be used for any game where you accrue points.
+
+
+Requirements: figlet (check your package manager)

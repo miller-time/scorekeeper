@@ -1,4 +1,4 @@
-import sys
+import sys, os
 
 players = {}
 
@@ -25,7 +25,7 @@ def getscore():
       try:
         val = int(raw_input("Score for "+player+"['-1' to exit]: "))
         if val == -1:
-          sys.exit(0)
+          end_game()
         break
       except ValueError:
         print 'Oops, invalid input!'
@@ -37,6 +37,16 @@ def main():
   while True:
     printscore()
     getscore()
+
+
+def snd((x,y)):
+  return y
+
+
+def end_game():
+  (winner, score) = sorted(players.items(), key=snd, reverse=True)[0]
+  os.system('figlet the winner is '+winner+'!')
+  sys.exit(0)
 
 
 if __name__=='__main__':
