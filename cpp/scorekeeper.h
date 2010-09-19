@@ -3,17 +3,25 @@
 
 #include "player.h"
 #include <list>
+#include <string>
+using namespace std;
 
 class Scorekeeper {
 
 public:
-    Scorekeeper();
+    Scorekeeper(string);
     ~Scorekeeper();
-    void addPlayer();
-    Player * getPlayer(char * name);
+    Player getPlayer(string name);
+    void getPlayers();
+    void showScore();
+    void addPoints();
+    void startGame();
+    void announceWinner();
 
 private:
+    string title;
     list<Player> PlayerList;
+    list<Player>::iterator i;
 
 };
 

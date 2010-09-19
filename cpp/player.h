@@ -1,16 +1,20 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
+using namespace std;
+
 class Player {
 
 public:
-    Player(char *);
+    Player(string);
     ~Player();
+    string getName();
     int getScore();
-    void setScore(int);
+    void addPoints(int);
 
 private:
-    char * myname;
+    string myname;
     int myscore;
 
 };

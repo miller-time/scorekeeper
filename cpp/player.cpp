@@ -1,20 +1,23 @@
-#include <cstring.h>
+#include <string>
 #include "player.h"
+using namespace std;
 
-Player::Player(char * name) {
-    myname = new char[strlen(name)-1];
-    strcpy(name, myname);
+Player::Player(string name) {
+    myname = name;
     myscore = 0;
 }
 
 Player::~Player() {
-    delete [] myname;
+}
+
+string Player::getName() {
+    return myname;
 }
 
 int Player::getScore() {
     return myscore;
 }
 
-void Player::setScore(int points) {
+void Player::addPoints(int points) {
     myscore += points;
 }
