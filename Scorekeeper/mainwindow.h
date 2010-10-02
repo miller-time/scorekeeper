@@ -21,6 +21,7 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    int num_players;
 };
 
 #endif // MAINWINDOW_H

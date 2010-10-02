@@ -4,7 +4,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow), num_players(0)
 {
     ui->setupUi(this);
     connect(ui->quitButton, SIGNAL(clicked()), this, SLOT(close()));
@@ -18,9 +18,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::addPlayer()
 {
-
-    ui->playerGrid->addWidget((new QLabel("Player 1")), 0, 0, Qt::AlignLeft);
-    ui->playerGrid->addWidget((new QLabel("Player 2")), 1, 0, Qt::AlignLeft);
+    ui->playerGrid->addWidget((new QLabel("New Player")), num_players, 0, Qt::AlignLeft);
+    ui->playerGrid->addWidget((new QLabel("0")), num_players, 1, Qt::AlignLeft);
+    ui->playerGrid->addWidget(new QPushButton("Add Points"), num_players++, 2, Qt::AlignRight);
 }
 
 void MainWindow::changeEvent(QEvent *e)
