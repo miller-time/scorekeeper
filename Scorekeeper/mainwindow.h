@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "score.h"
 
 namespace Ui {
     class MainWindow;
@@ -22,6 +23,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     int num_players;
+    Score backend;
 };
 
 #endif // MAINWINDOW_H
