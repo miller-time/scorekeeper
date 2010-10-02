@@ -1,0 +1,5 @@
+Hey! This is the C++ version of the Scorekeeper game.
+It currently runs on Linux or Windows, just compile it in your favorite
+compiler. I've tested in DevCpp on Windows, and g++ on Linux.
+
+Next step is creating a Qt GUI for it. :)
