@@ -35,9 +35,13 @@ void Scorekeeper::getPlayers() {
 void Scorekeeper::showScore() {
     cout << title << endl;
     for(i=PlayerList.begin(); i!=PlayerList.end(); i++) {
-        cout << (*i).getName() << ": \t"
-             << (*i).getScore() << endl;
+        cout << (*i).getName() << "\t";
     }
+    cout << endl;
+    for(i=PlayerList.begin(); i!=PlayerList.end(); i++) {
+        cout << (*i).getScore() << "\t\t";
+    }
+    cout << endl;
 }
 
 void Scorekeeper::addPoints() {

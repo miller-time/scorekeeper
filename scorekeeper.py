@@ -4,7 +4,7 @@ players = {}
 
 def init():
   while True:
-    name = raw_input('Please enter player name[blank if done]: ')
+    name = input("Please enter player name[blank if done]: ")
     if not name:
       break
     players[name] = 0
@@ -13,24 +13,24 @@ def init():
 
 
 def printscore():
-  print 'Current Score:'
-  print '\t'.join(players.keys())
-  scores = ''
+  print("Current Score:")
+  print("\t".join(players.keys()))
+  scores = ""
   for value in players.values():
-    scores += str(value)+'\t'
-  print scores
+    scores += str(value)+"\t"
+  print(scores)
 
 
 def getscore():
   for player in players:
     while True:
       try:
-        val = int(raw_input("Score for "+player+"['-1' to exit]: "))
+        val = int(input("Score for "+player+"['-1' to exit]: "))
         if val == -1:
           end_game()
         break
       except ValueError:
-        print 'Oops, invalid input!'
+        print("Oops, invalid input!")
     players[player] += val
 
 
@@ -41,15 +41,15 @@ def main():
     getscore()
 
 
-def snd((x,y)):
-  return y
+def snd(x):
+  return x[-1]
 
 
 def end_game():
   (winner, score) = sorted(players.items(), key=snd, reverse=True)[0]
-  os.system('figlet the winner is '+winner+'!')
+  os.system("figlet the winner is "+winner+"!")
   sys.exit(0)
 
 
-if __name__=='__main__':
+if __name__=="__main__":
   main()
