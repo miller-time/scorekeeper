@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include "scorekeeper.h"
@@ -33,15 +34,12 @@ void Scorekeeper::getPlayers() {
 }
 
 void Scorekeeper::showScore() {
-    cout << title << endl;
-    for(i=PlayerList.begin(); i!=PlayerList.end(); i++) {
-        cout << (*i).getName() << "\t";
-    }
-    cout << endl;
-    for(i=PlayerList.begin(); i!=PlayerList.end(); i++) {
-        cout << (*i).getScore() << "\t\t";
-    }
-    cout << endl;
+  cout << setiosflags(ios::left);
+  cout << title << endl;
+  for(i=PlayerList.begin(); i!=PlayerList.end(); i++) {
+    cout << setw(10) << (*i).getName() << "\t";
+    cout << (*i).getScore() << "\n";
+  }
 }
 
 void Scorekeeper::addPoints() {

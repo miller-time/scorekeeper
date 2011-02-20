@@ -1,3 +1,6 @@
 *.o
 moc_*
 ui_*
+Scorekeeper-build-desktop
+Scorekeeper/Scorekeeper.pro.*
+cpp/scorekeeper

@@ -4,7 +4,7 @@ players = {}
 
 def init():
   while True:
-    name = input("Please enter player name[blank if done]: ")
+    name = raw_input("Please enter player name[blank if done]: ")
     if not name:
       break
     players[name] = 0
@@ -25,7 +25,7 @@ def getscore():
   for player in players:
     while True:
       try:
-        val = int(input("Score for "+player+"['-1' to exit]: "))
+        val = int(raw_input("Score for "+player+"['-1' to exit]: "))
         if val == -1:
           end_game()
         break

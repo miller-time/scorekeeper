@@ -11,4 +11,4 @@ player.o: player.cpp
 	g++ -c player.cpp
 
 clean:
-	rm scorekeeper *.o
+	rm *.o
