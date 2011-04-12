@@ -1,17 +1,22 @@
 #include <string>
 #include <QLabel>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "addplayerdialog.h"
 #include "ui_addplayerdialog.h"
+#include "optionsdialog.h"
+#include "playerwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow), num_players(0)
 {
     ui->setupUi(this);
-    connect(ui->quitButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->addplayerButton, SIGNAL(clicked()), this, SLOT(addPlayer()));
+    connect(ui->actionAdd_Player, SIGNAL(triggered()), this, SLOT(addPlayer()));
+    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
+    on_actionOptions_triggered();
 }
 
 MainWindow::~MainWindow()
@@ -26,10 +31,15 @@ void MainWindow::addPlayer()
     {
         QString qname = addPlayerDialogBox.getName();
         std::string name = qname.toStdString();
-        ui->playerGrid->addWidget((new QLabel(qname)), num_players, 0, Qt::AlignLeft);
-        ui->playerGrid->addWidget((new QLabel("0")), num_players, 1, Qt::AlignLeft);
-        ui->playerGrid->addWidget(new QPushButton("Add Points"), num_players++, 2, Qt::AlignRight);
-        backend.addPlayer(name);
+        if (backend.nameExists(name)) {
+            QMessageBox::information(this, "Player Already Exists",
+                                     "That player name already exists, please choose another.");
+            return;
+        }
+        PlayerWidget * newplayer = new PlayerWidget(this, qname);
+        connect(newplayer, SIGNAL(addPoints(QString,int)), this, SLOT(addPoints(QString,int)));
+        ui->playerGrid->addWidget(newplayer);
+        backend.addPlayer(name, newplayer);
     }
 }
 
@@ -43,4 +53,30 @@ void MainWindow::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void MainWindow::on_actionOptions_triggered()
+{
+    optionsDialog options(this, QString::fromStdString(backend.getTitle()));
+    if (options.exec()) {
+        QString title = options.getTitle();
+        ui->titleLabel->setText(title);
+        backend.setTitle(title.toStdString());
+    }
+}
+
+void MainWindow::on_restartButton_clicked()
+{
+    backend.zeroScores();
+}
+
+void MainWindow::addPoints(QString who, int howmuch)
+{
+    backend.addPoints(who.toStdString(), howmuch);
+}
+
+void MainWindow::on_endButton_clicked()
+{
+    string winner = backend.getWinner();
+    QMessageBox::information(this, "Winner!", "And the winner is...\n" + QString::fromStdString(winner) + "!!!");
 }

@@ -2,20 +2,24 @@
 #define PLAYER_H
 
 #include <string>
+#include "playerwidget.h"
 using namespace std;
 
 class Player {
 
 public:
-    Player(string);
+    Player(string, PlayerWidget *);
     ~Player();
     string getName();
     int getScore();
     void addPoints(int);
+    PlayerWidget * getWidget();
+    void zeroScore();
 
 private:
     string myname;
     int myscore;
+    PlayerWidget * mywidget;
 
 };
 

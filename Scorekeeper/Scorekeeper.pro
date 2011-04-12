@@ -7,10 +7,19 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     addplayerdialog.cpp \
     score.cpp \
-    player.cpp
+    player.cpp \
+    optionsdialog.cpp \
+    playerwidget.cpp \
+    addpointsdialog.cpp
 HEADERS += mainwindow.h \
     addplayerdialog.h \
     score.h \
-    player.h
+    player.h \
+    optionsdialog.h \
+    playerwidget.h \
+    addpointsdialog.h
 FORMS += mainwindow.ui \
-    addplayerdialog.ui
+    addplayerdialog.ui \
+    optionsdialog.ui \
+    playerwidget.ui \
+    addpointsdialog.ui

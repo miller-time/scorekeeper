@@ -10,9 +10,9 @@ namespace Ui {
 class addPlayerDialog : public QDialog {
     Q_OBJECT
 public:
+    QString getName();
     addPlayerDialog(QWidget *parent = 0);
     ~addPlayerDialog();
-    QString getName();
 
 protected:
     void changeEvent(QEvent *e);
