@@ -1,5 +1,14 @@
-This is the Qt edition of the scorekeeper program! It is far from complete, but please check out Qt at
-http://qt.nokia.com/
-It is an open source development tool that you can use to compile this program.
-It is compatible with Windows, Mac, and Linux. Has only been tested on Ubuntu
-Linux so far.
+This is the Qt version of Scorekeeper. 
+I have compiled it on the systems I have available, and the binaries are
+available at http://millertime.dnsdojo.com/downloads/
+To get Qt, please visit http://qt.nokia.com/
+
+This is an early stage (beta if you will) version of Scorekeeper in Qt. Many features
+are swimming in my head, and are yet to be implemented.
+
+If you are using Windows, please put the executable with the required .DLL files. I don't
+yet know how to link against them (assuming that is possible). Those files can be found on
+my download page (linked above).
+
+This is one of my first GUI programs, and I'm still learning how Qt manages different aspects
+of that, so bear with me.

@@ -6,6 +6,10 @@
 #include <string>
 using namespace std;
 
+/*
+ * Controller class to keep track of how the game is going
+ * with a list of Player instances.
+ */
 class Scorekeeper {
 
 public:

@@ -1,8 +1,18 @@
 import sys, os
 
+"""
+The original version of Scorekeeper
+
+Just a text-only and extremely simple program that
+I wrote in about an hour.
+"""
+
 players = {}
 
 def init():
+  """
+  initialize the players dict by asking for a series of names
+  """
   while True:
     name = raw_input("Please enter player name[blank if done]: ")
     if not name:
@@ -13,6 +23,10 @@ def init():
 
 
 def printscore():
+  """
+  I'm amazed that this function works...
+  Sort of iterate through the dict, printing the scores...
+  """
   print("Current Score:")
   print("\t".join(players.keys()))
   scores = ""
@@ -22,6 +36,9 @@ def printscore():
 
 
 def getscore():
+  """
+  Ask for an update for each player's score.
+  """
   for player in players:
     while True:
       try:
@@ -35,6 +52,9 @@ def getscore():
 
 
 def main():
+  """
+  loop back and forth between showing the scores and updating them
+  """
   init()
   while True:
     printscore()
@@ -46,6 +66,9 @@ def snd(x):
 
 
 def end_game():
+  """
+  just announce the winner, using deprecated os.system! eww!
+  """
   (winner, score) = sorted(players.items(), key=snd, reverse=True)[0]
   os.system("figlet the winner is "+winner+"!")
   sys.exit(0)

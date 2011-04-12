@@ -1,5 +1,32 @@
-This is a scorecard, we use it for a card game called Hand and Foot, but it
-could be used for any game where you accrue points.
+================
+Scorekeeper v0.1
+================
 
+Author: Russell Miller
 
-Requirements: figlet (check your package manager)
+Background
+----------
+This is a program I wrote a long time ago to keep score for a card game called
+Hand and Foot. It's similar to Phase 10, which this program works perfect for.
+Any other game where you would normally write scores on paper can utilize this
+simple program.
+
+Python
+------
+Originally I wrote this in Python and the text-only version of it runs from the command
+line. It requires figlet, just to display the winner.
+
+C++
+---
+Then, just for the sake of keeping up on my C++, I rewrote an object-oriented
+version of Scorekeeper in C++. This is included in the 'cpp' directory. It runs
+from the command line and is also text-only.
+
+Qt
+--
+Right when I finished the C++ version of Scorekeeper, I knew I wanted to attach
+that to a GUI with Qt. I had started working on a project for class at the time,
+but didn't understand Qt's framework extremely well yet. Months later, I finally
+finished the Qt version.
+
+It is currently still in its early stages, at version 0.1.

@@ -4,6 +4,9 @@
 #include <string>
 using namespace std;
 
+/* 
+ * Container class to hold a name and a score
+ */
 class Player {
 
 public:
