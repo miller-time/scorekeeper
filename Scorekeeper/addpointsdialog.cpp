@@ -6,6 +6,7 @@ addpointsDialog::addpointsDialog(QWidget *parent) :
     ui(new Ui::addpointsDialog)
 {
     ui->setupUi(this);
+    ui->points->setFocus();
 }
 
 addpointsDialog::~addpointsDialog()

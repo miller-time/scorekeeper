@@ -6,6 +6,7 @@ addPlayerDialog::addPlayerDialog(QWidget *parent) :
     ui(new Ui::addPlayerDialog)
 {
     ui->setupUi(this);
+    ui->nameEdit->setFocus();
 }
 
 addPlayerDialog::~addPlayerDialog()
