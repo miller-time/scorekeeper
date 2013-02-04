@@ -5,21 +5,10 @@ TARGET = Scorekeeper
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    addplayerdialog.cpp \
-    score.cpp \
-    player.cpp \
-    optionsdialog.cpp \
-    playerwidget.cpp \
-    addpointsdialog.cpp
+    scorekeepermodel.cpp
 HEADERS += mainwindow.h \
-    addplayerdialog.h \
-    score.h \
-    player.h \
-    optionsdialog.h \
-    playerwidget.h \
-    addpointsdialog.h
-FORMS += mainwindow.ui \
-    addplayerdialog.ui \
-    optionsdialog.ui \
-    playerwidget.ui \
-    addpointsdialog.ui
+    scorekeepermodel.h
+FORMS += mainwindow.ui
+
+RESOURCES += \
+    icons.qrc

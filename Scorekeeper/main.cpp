@@ -1,6 +1,5 @@
 #include <QtGui/QApplication>
 #include "mainwindow.h"
-#include "player.h"
 
 int main(int argc, char *argv[])
 {

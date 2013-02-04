@@ -1,22 +1,37 @@
-#include <string>
-#include <QLabel>
+#include <QInputDialog>
 #include <QMessageBox>
+#include <QIntValidator>
+#include <QTime>
+
+#include "scorekeepermodel.h"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "addplayerdialog.h"
-#include "ui_addplayerdialog.h"
-#include "optionsdialog.h"
-#include "playerwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow), num_players(0)
+    ui(new Ui::MainWindow)
 {
+    qsrand(QTime::currentTime().msec());
+    randomInsults << " is adopted." << " doesn't even know what is happening"
+                  << " is an IDIOT! HAHA!!" << " needs to catch up"
+                  << " is a pothead, Focker." << " is playing Golf.";
+
     ui->setupUi(this);
-    connect(ui->addplayerButton, SIGNAL(clicked()), this, SLOT(addPlayer()));
-    connect(ui->actionAdd_Player, SIGNAL(triggered()), this, SLOT(addPlayer()));
-    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
-    on_actionOptions_triggered();
+    model = new ScorekeeperModel();
+    ui->tableView->setModel(model);
+
+    connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addPlayer()));
+    connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removePlayer()));
+    connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(restart()));
+
+    connect(model, SIGNAL(setSubmitButton(QModelIndex)),
+            this, SLOT(setSubmitButton(QModelIndex)));
+    connect(model, SIGNAL(clearSubmitButton(QModelIndex)),
+            this, SLOT(clearSubmitButton(QModelIndex)));
+
+    connect(model, SIGNAL(theCurrentLoserIs(QString)),
+            this, SLOT(announceIdiot(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -26,57 +41,45 @@ MainWindow::~MainWindow()
 
 void MainWindow::addPlayer()
 {
-    addPlayerDialog addPlayerDialogBox;
-    if (addPlayerDialogBox.exec())
-    {
-        QString qname = addPlayerDialogBox.getName();
-        std::string name = qname.toStdString();
-        if (backend.nameExists(name)) {
+    QString name = QInputDialog::getText(this, "New Player", "Name:");
+    if (!name.isEmpty()) {
+        if (!model->playerExists(name))
+            model->addPlayer(name);
+        else
             QMessageBox::information(this, "Player Already Exists",
                                      "That player name already exists, please choose another.");
-            return;
-        }
-        PlayerWidget * newplayer = new PlayerWidget(this, qname);
-        connect(newplayer, SIGNAL(addPoints(QString,int)), this, SLOT(addPoints(QString,int)));
-        ui->playerGrid->addWidget(newplayer);
-        backend.addPlayer(name, newplayer);
     }
 }
 
-void MainWindow::changeEvent(QEvent *e)
+void MainWindow::removePlayer()
 {
-    QMainWindow::changeEvent(e);
-    switch (e->type()) {
-    case QEvent::LanguageChange:
-        ui->retranslateUi(this);
-        break;
-    default:
-        break;
+    QModelIndexList selectedColumns = ui->tableView->selectionModel()->selectedColumns();
+    foreach (QModelIndex mi, selectedColumns) {
+        QString name = model->headerData(mi.column()).toString();
+        model->removePlayer(name);
     }
 }
 
-void MainWindow::on_actionOptions_triggered()
+void MainWindow::restart()
 {
-    optionsDialog options(this, QString::fromStdString(backend.getTitle()));
-    if (options.exec()) {
-        QString title = options.getTitle();
-        ui->titleLabel->setText(title);
-        backend.setTitle(title.toStdString());
-    }
+    model->clear();
 }
 
-void MainWindow::on_restartButton_clicked()
+void MainWindow::setSubmitButton(const QModelIndex &mi)
 {
-    backend.zeroScores();
+    QPushButton *submitButton = new QPushButton();
+    submitButton->setIcon(QIcon(":/icons/submit.png"));
+    connect(submitButton, SIGNAL(clicked()), model, SLOT(submitScores()));
+    ui->tableView->setIndexWidget(mi, submitButton);
 }
 
-void MainWindow::addPoints(QString who, int howmuch)
+void MainWindow::clearSubmitButton(const QModelIndex &mi)
 {
-    backend.addPoints(who.toStdString(), howmuch);
+    ui->tableView->setIndexWidget(mi, 0);
 }
 
-void MainWindow::on_endButton_clicked()
+void MainWindow::announceIdiot(const QString &name)
 {
-    string winner = backend.getWinner();
-    QMessageBox::information(this, "Winner!", "And the winner is...\n" + QString::fromStdString(winner) + "!!!");
+    QString insult = randomInsults.at(qrand() % randomInsults.count());
+    QMessageBox::information(this, "LoL Loser", name+insult);
 }

@@ -2,11 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "score.h"
 
 namespace Ui {
     class MainWindow;
 }
+
+class ScorekeeperModel;
+class QLineEdit;
+class QModelIndex;
+class QPushButton;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -16,20 +20,17 @@ public:
 
 public slots:
     void addPlayer();
-    void addPoints(QString, int);
-
-protected:
-    void changeEvent(QEvent *e);
+    void removePlayer();
+    void restart();
+    void setSubmitButton(const QModelIndex &mi);
+    void clearSubmitButton(const QModelIndex &mi);
+    void announceIdiot(const QString &name);
 
 private:
     Ui::MainWindow *ui;
-    int num_players;
-    Score backend;
-
-private slots:
-    void on_endButton_clicked();
-    void on_restartButton_clicked();
-    void on_actionOptions_triggered();
+    ScorekeeperModel *model;
+    QList<QLineEdit*> scoreInputs;
+    QStringList randomInsults;
 };
 
 #endif // MAINWINDOW_H
