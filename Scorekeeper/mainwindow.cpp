@@ -21,9 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new ScorekeeperModel();
     ui->tableView->setModel(model);
 
+    connect(ui->actionAdd_Player, SIGNAL(triggered()), this, SLOT(addPlayer()));
     connect(ui->addButton, SIGNAL(clicked()), this, SLOT(addPlayer()));
+
     connect(ui->removeButton, SIGNAL(clicked()), this, SLOT(removePlayer()));
+
+    connect(ui->actionRestart, SIGNAL(triggered()), this, SLOT(restart()));
     connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(restart()));
+
+    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(quit()));
 
     connect(model, SIGNAL(setSubmitButton(QModelIndex)),
             this, SLOT(setSubmitButton(QModelIndex)));
@@ -60,9 +66,25 @@ void MainWindow::removePlayer()
     }
 }
 
+bool MainWindow::areYouSure(const QString &affirm)
+{
+    QString message = "Are you sure you want to " + affirm + "?";
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Are you sure?", message, QMessageBox::Yes|QMessageBox::No);
+    return (reply == QMessageBox::Yes);
+}
+
 void MainWindow::restart()
 {
-    model->clear();
+    if (areYouSure("restart")) {
+        model->clear();
+    }
+}
+
+void MainWindow::quit()
+{
+    if (areYouSure("quit")) {
+        close();
+    }
 }
 
 void MainWindow::setSubmitButton(const QModelIndex &mi)

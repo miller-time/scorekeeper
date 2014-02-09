@@ -17,11 +17,13 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    bool areYouSure(const QString &affirm);
 
 public slots:
     void addPlayer();
     void removePlayer();
     void restart();
+    void quit();
     void setSubmitButton(const QModelIndex &mi);
     void clearSubmitButton(const QModelIndex &mi);
     void announceIdiot(const QString &name);

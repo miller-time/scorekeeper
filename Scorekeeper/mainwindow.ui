@@ -122,7 +122,6 @@
     </property>
     <addaction name="actionAdd_Player"/>
     <addaction name="actionRestart"/>
-    <addaction name="actionNew"/>
     <addaction name="actionOptions"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -147,10 +146,16 @@
    <property name="text">
     <string>Restart</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
   </action>
   <action name="actionAdd_Player">
    <property name="text">
     <string>Add Player</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
  </widget>
