@@ -69,7 +69,11 @@ void MainWindow::removePlayer()
 bool MainWindow::areYouSure(const QString &affirm)
 {
     QString message = "Are you sure you want to " + affirm + "?";
-    QMessageBox::StandardButton reply = QMessageBox::question(this, "Are you sure?", message, QMessageBox::Yes|QMessageBox::No);
+    QMessageBox::StandardButton reply = QMessageBox::question(this,
+                                                              "Are you sure?",
+                                                              message,
+                                                              QMessageBox::Yes|QMessageBox::No,
+                                                              QMessageBox::Yes);
     return (reply == QMessageBox::Yes);
 }
 

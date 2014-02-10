@@ -15,13 +15,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">QWidget { background-color: black; }</string>
+    <string notr="true">QWidget { background-color: #CAE5FF; }</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QTableView" name="tableView">
       <property name="styleSheet">
-       <string notr="true">QTableView { color: white; background-color: black; } QSpinBox { color:white; background-color:black; }</string>
+       <string notr="true">QTableView { color: black; background-color: #CAE5FF; } QSpinBox { color:black; background-color: #CAE5FF; }</string>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
       </property>
       <property name="selectionMode">
        <enum>QAbstractItemView::SingleSelection</enum>
